@@ -91,8 +91,5 @@ make bor
 echo -e "${GREEN} Installing bor.... ${DF}"
 
 git clone https://github.com/maticnetwork/public-testnets
-cd public-testnets/CS-1001
-
-echo -e "${RED} Please set up your infura.io key in ${GOPATH}/src/github.com/maticnetwork/public-testnets/CS-1001.\n1. Register in infura.io\n2. Add new project\n3. Your key is in /v3/YOUR_API_KEY\n\n ${DF}"
 
 exit
