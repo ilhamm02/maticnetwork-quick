@@ -1,7 +1,7 @@
 # Stake Counter Quick Installer
 This is quick installer for you to setup node in ***Stake Counter***. Please follow the directions to use this quick installer.
 
-1. Create your own server or you can using VPS. **For OS, this script just work in Ubuntu.**
+1. Create your own server or you can using VPS. **For OS, this script tested in Ubuntu, or you can using Debian.**
 2. Go to your $HOME in your server (```cd```)
 3. Run ```curl https://raw.githubusercontent.com/ilhamm24/maticnetwork-quick/master/install_matic.sh > installer_matic.sh```
 4. Then, you can run ```bash installer_matic.sh```
