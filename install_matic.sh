@@ -87,9 +87,6 @@ cd bor
 git checkout CS-1001
 make bor
 
-#Get Heimdall Genesis
-echo -e "${GREEN} Installing bor.... ${DF}"
-
 git clone https://github.com/maticnetwork/public-testnets
 
 exit
