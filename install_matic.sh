@@ -6,6 +6,7 @@ DF=`tput sgr0`
 
 sudo apt-get update
 sudo apt-get -y upgrade
+sudo apt-get install  git -y
 
 echo -e "${GREEN} Installing Golang (1.13.3).... ${DF}"
 
@@ -58,6 +59,8 @@ echo -e "${GREEN} Turn on rabbitmq-server.... ${DF}"
 sudo systemctl start rabbitmq-server.service
 sudo systemctl enable rabbitmq-server.service
 
+sudo apt-get install build-essential -y
+
 #Installing Heimdall
 mkdir -p $GOPATH/src/github.com/maticnetwork
 cd $GOPATH/src/github.com/maticnetwork
@@ -88,5 +91,6 @@ git checkout CS-1001
 make bor
 
 git clone https://github.com/maticnetwork/public-testnets
+cd public-testnets/CS-1001
 
 exit
