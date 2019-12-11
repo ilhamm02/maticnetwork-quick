@@ -10,21 +10,15 @@ sudo apt-get install  git -y
 
 echo -e "${GREEN} Installing Golang (1.13.3).... ${DF}"
 
-wget https://dl.google.com/go/go1.13.3.linux-amd64.tar.gz
+wget https://dl.google.com/go/go1.13.5.linux-amd64.tar.gz
 
-sudo tar -xvf go1.13.3.linux-amd64.tar.gz
-sudo mv go /usr/local
-
-curl https://gist.githubusercontent.com/vaibhavchellani/cbe0fa947dc0a6557cb9583d081ff8ce/raw/d47b3df14ccffdd7a965e44c39fb5ec235360166/new.sh > install_go.sh
-bash install_go.sh
+sudo tar -xvf go1.13.5.linux-amd64.tar.gz
 
 #Set golang environment
-export GOROOT=/usr/local/go
+export GOROOT=/root/go
 export GOPATH=$HOME
 export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
-export GOBIN=$HOME/bin
-
-mv /root/src /root/go
+export GOBIN=$GOROOT/bin
 
 #Installing dep
 echo -e "${GREEN} Installing dep.... ${DF}"
