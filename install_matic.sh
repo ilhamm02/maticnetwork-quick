@@ -34,6 +34,8 @@ git checkout $DEP_LATEST
 go install -ldflags="-X main.version=$DEP_LATEST" ./cmd/dep
 git checkout master
 
+mv src go/src
+
 #Installing erlang
 echo -e "${GREEN} Installing erlang.... ${DF}"
 
@@ -92,5 +94,11 @@ make bor
 
 git clone https://github.com/maticnetwork/public-testnets
 cd public-testnets/CS-1001
+cp heimdall-genesis.json ~/.heimdalld/config/genesis.json
+cd bor-config
+cp ../<testnet version>/bor-genesis.json genesis.json
+
+$GOPATH/src/github.com/maticnetwork/bor/build/bin/bor --datadir dataDir init genesis.json
+cp static-nodes.json ../bor-config/dataDir/bor/
 
 exit
