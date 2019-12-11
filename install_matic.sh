@@ -24,6 +24,8 @@ export GOPATH=$HOME
 export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 export GOBIN=$HOME/bin
 
+mv /root/src /root/go
+
 #Installing dep
 echo -e "${GREEN} Installing dep.... ${DF}"
 
@@ -33,8 +35,6 @@ DEP_LATEST=$(git describe --abbrev=0 --tags)
 git checkout $DEP_LATEST
 go install -ldflags="-X main.version=$DEP_LATEST" ./cmd/dep
 git checkout master
-
-mv src go/src
 
 #Installing erlang
 echo -e "${GREEN} Installing erlang.... ${DF}"
