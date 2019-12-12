@@ -74,7 +74,6 @@ sleep 15
 #Installing bor
 echo -e "${GREEN} Installing bor.... ${DF}"
 
-mkdir -p $GOPATH/src/github.com/maticnetwork
 cd $GOPATH/src/github.com/maticnetwork
 git clone https://github.com/maticnetwork/bor
 cd bor
