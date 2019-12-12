@@ -14,23 +14,16 @@ wget https://dl.google.com/go/go1.13.5.linux-amd64.tar.gz
 
 sudo tar -C /usr/local -xvf go1.13.5.linux-amd64.tar.gz
 
-mkdir go
-
 #Set golang environment
 export GOROOT=/usr/local/go
-export GOPATH=$HOME/go
+export GOPATH=$HOME
 export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 export GOBIN=$GOROOT/bin
 
 #Installing dep
 echo -e "${GREEN} Installing dep.... ${DF}"
 
-go get -d -u github.com/golang/dep
-cd $(go env GOPATH)/src/github.com/golang/dep
-DEP_LATEST=$(git describe --abbrev=0 --tags)
-git checkout $DEP_LATEST
-go install -ldflags="-X main.version=$DEP_LATEST" ./cmd/dep
-git checkout master
+sudo tar -C /usr/local -xvf go1.13.5.linux-amd64.tar.gz
 
 #Installing erlang
 echo -e "${GREEN} Installing erlang.... ${DF}"
