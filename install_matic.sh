@@ -79,6 +79,7 @@ git clone https://github.com/maticnetwork/bor
 cd bor
 git checkout CS-1001
 make bor
+curl https://raw.githubusercontent.com/maticnetwork/public-testnets/master/CS-1001/static-nodes.json > static-nodes.json
 
 git clone https://github.com/maticnetwork/public-testnets
 cd public-testnets/CS-1001
@@ -88,5 +89,8 @@ cp ../<testnet version>/bor-genesis.json genesis.json
 
 $GOPATH/src/github.com/maticnetwork/bor/build/bin/bor --datadir dataDir init genesis.json
 cp static-nodes.json ../bor-config/dataDir/bor/
+
+cd $GOPATH/src/github.com/maticnetwork/public-testnets/bor-config/dataDir/bor
+curl https://raw.githubusercontent.com/maticnetwork/public-testnets/master/CS-1001/static-nodes.json > static-nodes.json
 
 exit
