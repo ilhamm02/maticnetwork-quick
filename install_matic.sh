@@ -14,8 +14,10 @@ wget https://dl.google.com/go/go1.13.5.linux-amd64.tar.gz
 
 sudo tar -xvf go1.13.5.linux-amd64.tar.gz
 
+mkdir go
+
 #Set golang environment
-export GOROOT=$HOME/go
+export GOROOT=/usr/local/go
 export GOPATH=$HOME/go
 export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 export GOBIN=$GOROOT/bin
