@@ -17,6 +17,13 @@ This is quick installer for you to setup node in ***Stake Counter***. Please fol
 3. Go to your project detail
 4. The API key is in .../v3/THIS_IS_YOUR_KEY
 
+## How to run node?
+1. Run `heimdalld start`
+2. Run `heimdalld rest-server`
+3. Run `bridge start --all`
+4. Go to bor-config `cd ${GOPATH}/src/github.com/maticnetwork/public-testnets/bor-config`
+5. Run bor `bash start.sh`
+
 Are you got some problem? Go to Stake Counter discord channel.
 
 Telegram of creator: @OkeSip.
