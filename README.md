@@ -7,7 +7,7 @@ This is quick installer for you to setup node in ***Stake Counter***. Please fol
 4. Then, you can run ```bash installer_matic.sh```
 5. After installation completed, set up your infura.io key in `nano ${GOPATH}/src/github.com/maticnetwork/public-testnets/CS-1001/heimdall-config.toml`.
 6. Edit ~/.heimdalld/config/config.toml (`nano ~/.heimdalld/config/config.toml`) in `persistent_peers=""` with heimdall-seeds.txt (in .../public-testnets/CS-1001 folder)
-7. Then, copy heimdall-config.toml to /.heimdalld/config/genesis.json `cp ${GOPATH}/src/github.com/maticnetwork/public-testnets/CS-1001/heimdall-config.toml/heimdall-config.toml ~/.heimdalld/config/heimdall-config.toml`.
+7. Then, copy heimdall-config.toml to /.heimdalld/config/genesis.json `cp ${GOPATH}/src/github.com/maticnetwork/public-testnets/CS-1001/heimdall-config.toml ~/.heimdalld/config/heimdall-config.toml`.
 
 **IMPORTANT: THE TESTNET VERSION OF THIS SCRIPT IS CS-1001**
 
