@@ -8,58 +8,104 @@ sudo apt-get update
 sudo apt-get -y upgrade
 sudo apt-get install  git -y
 
-echo -e "${GREEN} Installing Golang (1.13.3).... ${DF}"
+if ! [ -x "$(command -v go)" ];then
+  echo -e "${GREEN} Installing Golang (1.13.3).... ${DF}"
 
-wget https://dl.google.com/go/go1.13.5.linux-amd64.tar.gz
+  wget https://dl.google.com/go/go1.13.5.linux-amd64.tar.gz
 
-sudo tar -C /usr/local -xvf go1.13.5.linux-amd64.tar.gz
+  sudo tar -C /usr/local -xvf go1.13.5.linux-amd64.tar.gz
 
-#Set golang environment
-export GOROOT=/usr/local/go
-export GOPATH=$HOME/go
-export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
-export GOBIN=$GOROOT/bin
+  #Set golang environment
+  export GOROOT=/usr/local/go
+  export GOPATH=$HOME/go
+  export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+  export GOBIN=$GOROOT/bin
+  
+  echo -e "${GREEN} Installing dep.... ${DF}"
+  curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+else
+  if ! [ -x "$(command -v dep)" ];then
+    echo -e "${GREEN} Installing dep.... ${DF}"
+    curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+  else
+    echo "${GREEN} Golang and dep already installed... ${DF}"
+  fi
+fi
 
-#Installing dep
-echo -e "${GREEN} Installing dep.... ${DF}"
+if ! [ -x "$(command -v erl)" ];then
+  echo -e "${GREEN} Installing erlang.... ${DF}"
 
-curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+  wget https://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb
+  sudo dpkg -i erlang-solutions_1.0_all.deb
 
-#Installing erlang
-echo -e "${GREEN} Installing erlang.... ${DF}"
+  sudo apt-get update
+  sudo apt-get install erlang -y
 
-wget https://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb
-sudo dpkg -i erlang-solutions_1.0_all.deb
+  sudo apt-get update
+  sudo apt-get install esl-erlang -y
+else
+  echo "${GREEN} Erlang already installed... ${DF}"
+fi
 
-sudo apt-get update
-sudo apt-get install erlang -y
+if ! [ -x "$(command -v rabbitmq-server)" ];then
+  echo -e "${GREEN} Installing rabbitmq-server.... ${DF}"
 
-sudo apt-get update
-sudo apt-get install esl-erlang -y
-
-#Installing rabbitmq-server
-echo -e "${GREEN} Installing rabbitmq-server.... ${DF}"
-
-echo -e "deb https://dl.bintray.com/rabbitmq/debian xenial main" | sudo tee /etc/apt/sources.list.d/bintray.rabbitmq.list
-wget -O- https://www.rabbitmq.com/rabbitmq-release-signing-key.asc | sudo apt-key add -
-sudo apt-get update
-sudo apt-get install rabbitmq-server -y
+  echo -e "deb https://dl.bintray.com/rabbitmq/debian xenial main" | sudo tee /etc/apt/sources.list.d/bintray.rabbitmq.list
+  wget -O- https://www.rabbitmq.com/rabbitmq-release-signing-key.asc | sudo apt-key add -
+  sudo apt-get update
+  sudo apt-get install rabbitmq-server -y
+else
+  echo "${GREEN} Rabbitmq-server already installed... ${DF}"
+fi
 
 #Turn on rabbitmq-server
 echo -e "${GREEN} Turn on rabbitmq-server.... ${DF}"
 sudo systemctl start rabbitmq-server.service
 sudo systemctl enable rabbitmq-server.service
 
-sudo apt-get install build-essential -y
+if ! [ -x "$(command -v make)" ];then
+  sudo apt-get install build-essential -y
+else
+  echo "${GREEN} Build essential already installed... ${DF}"
+fi
 
-#Installing Heimdall
-mkdir -p $GOPATH/src/github.com/maticnetwork
-cd $GOPATH/src/github.com/maticnetwork
-git clone https://github.com/maticnetwork/heimdall
-cd heimdall
+if ! [ -x "$(command -v heimdalld)" ];then
+  mkdir -p $GOPATH/src/github.com/maticnetwork
+  if ! [[ -d $GOPATH/src/github.com/maticnetwork ]]; then
+    mkdir -p $GOPATH/src/github.com/maticnetwork
+    cd $GOPATH/src/github.com/maticnetwork
+    git clone https://github.com/maticnetwork/heimdall
+    if ! [[ -d $GOPATH/src/github.com/maticnetwork/heimdall ]]; then
+      git clone https://github.com/maticnetwork/heimdall
+      cd heimdall
 
-git checkout CS-1001
-make dep && make install
+      git checkout CS-1001
+      make dep && make install
+    else
+      cd heimdall
+
+      git checkout CS-1001
+      make dep && make install
+    fi
+  else
+    cd $GOPATH/src/github.com/maticnetwork
+    git clone https://github.com/maticnetwork/heimdall
+    if ! [[ -d $GOPATH/src/github.com/maticnetwork/heimdall ]]; then
+      git clone https://github.com/maticnetwork/heimdall
+      cd heimdall
+
+      git checkout CS-1001
+      make dep && make install
+    else
+      cd heimdall
+
+      git checkout CS-1001
+      make dep && make install
+    fi
+  fi
+else
+  echo "${GREEN} Heimdalld already installed... ${DF}"
+fi
 
 #Setting Heimdall Node
 echo -e "${GREEN} Setting Heimdall Node.... ${DF}"
@@ -71,24 +117,44 @@ echo -e "${DF}"
 echo -e "${GREEN} Please wait 15 seconds. It will be install bor.... ${DF}"
 sleep 15
 
-#Installing bor
-echo -e "${GREEN} Installing bor.... ${DF}"
+if ! [ -x "$(command -v bor)" ];then
+  echo -e "${GREEN} Installing bor.... ${DF}"
+
+  cd $GOPATH/src/github.com/maticnetwork
+  git clone https://github.com/maticnetwork/bor
+  if ! [[ -d $GOPATH/src/github.com/maticnetwork/bor ]]; then
+    git clone https://github.com/maticnetwork/bor
+    cd bor
+    git checkout CS-1001
+    make bor
+    curl https://raw.githubusercontent.com/maticnetwork/public-testnets/master/CS-1001/static-nodes.json > static-nodes.json
+  else
+    cd bor
+    git checkout CS-1001
+    make bor
+    curl https://raw.githubusercontent.com/maticnetwork/public-testnets/master/CS-1001/static-nodes.json > static-nodes.json
+  fi
+else
+  echo "${GREEN} Bor already installer... ${DF}"
+fi
 
 cd $GOPATH/src/github.com/maticnetwork
-git clone https://github.com/maticnetwork/bor
-cd bor
-git checkout CS-1001
-make bor
-curl https://raw.githubusercontent.com/maticnetwork/public-testnets/master/CS-1001/static-nodes.json > static-nodes.json
-
 git clone https://github.com/maticnetwork/public-testnets
-cd public-testnets/CS-1001
-cp heimdall-genesis.json ~/.heimdalld/config/genesis.json
-cd bor-config
-cp ../<testnet version>/bor-genesis.json genesis.json
+if ! [[ -d $GOPATH/src/github.com/maticnetwork/public-testnets ]]; then
+  git clone https://github.com/maticnetwork/public-testnets
+  cd public-testnets/CS-1001
+  cp heimdall-genesis.json ~/.heimdalld/config/genesis.json
+  cd bor-config
+  cp ../CS-1001/bor-genesis.json genesis.json
+else
+  cd public-testnets/CS-1001
+  cp heimdall-genesis.json ~/.heimdalld/config/genesis.json
+  cd bor-config
+  cp ../CS-1001/bor-genesis.json genesis.json
+fi
 
 $GOPATH/src/github.com/maticnetwork/bor/build/bin/bor --datadir dataDir init genesis.json
-cp static-nodes.json ../bor-config/dataDir/bor/
+cp static-nodes.json $GOPATH/src/github.com/maticnetwork/public-testnets/bor-config/dataDir/bor/
 
 cd $GOPATH/src/github.com/maticnetwork/public-testnets/bor-config/dataDir/bor
 curl https://raw.githubusercontent.com/maticnetwork/public-testnets/master/CS-1001/static-nodes.json > static-nodes.json
