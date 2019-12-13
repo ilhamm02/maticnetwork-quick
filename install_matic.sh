@@ -23,7 +23,7 @@ export GOBIN=$GOROOT/bin
 #Installing dep
 echo -e "${GREEN} Installing dep.... ${DF}"
 
-sudo tar -C /usr/local -xvf go1.13.5.linux-amd64.tar.gz
+curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
 
 #Installing erlang
 echo -e "${GREEN} Installing erlang.... ${DF}"
