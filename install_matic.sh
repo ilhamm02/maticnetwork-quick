@@ -12,23 +12,15 @@ if ! [ -x "$(command -v go)" ];then
   echo -e "${GREEN} Installing Golang (1.13.3).... ${DF}"
 
   rm -rf /usr/local/go
-  wget https://dl.google.com/go/go1.13.5.linux-amd64.tar.gz
-
-  sudo tar -C /usr/local -xvf go1.13.5.linux-amd64.tar.gz
-
-  export GOROOT=/usr/local/go
-  export GOPATH=$HOME/go
-  export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
-  export GOBIN=$GOROOT/bin
-  
-  rm -rf go1.13.5.linux-amd64.tar.gz
+  sudo apt-get install golang-go
+  snap install go -classic
 
   echo -e "${GREEN} Installing dep.... ${DF}"
-  curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+  sudo apt-get install go-dep
 else
   if ! [ -x "$(command -v dep)" ];then
     echo -e "${GREEN} Installing dep.... ${DF}"
-    curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+    sudo apt-get install go-dep
   else
     echo -e "${GREEN} Golang and dep already installed... ${DF}"
   fi
