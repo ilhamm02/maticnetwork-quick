@@ -11,6 +11,7 @@ sudo apt-get install  git -y
 if ! [ -x "$(command -v go)" ];then
   echo -e "${GREEN} Installing Golang (1.13.3).... ${DF}"
 
+  rm -rf /usr/local/go
   wget https://dl.google.com/go/go1.13.5.linux-amd64.tar.gz
 
   sudo tar -C /usr/local -xvf go1.13.5.linux-amd64.tar.gz
@@ -20,6 +21,8 @@ if ! [ -x "$(command -v go)" ];then
   export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
   export GOBIN=$GOROOT/bin
   
+  rm -rf go1.13.5.linux-amd64.tar.gz
+
   echo -e "${GREEN} Installing dep.... ${DF}"
   curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
 else
@@ -44,6 +47,7 @@ if ! [ -x "$(command -v erl)" ];then
   sudo apt-get install esl-erlang -y
 else
   echo -e "${GREEN} Erlang already installed... ${DF}"
+  rm -rf erlang-solutions_1.0_all.deb
 fi
 
 if ! [ -x "$(command -v rabbitmq-server)" ];then
