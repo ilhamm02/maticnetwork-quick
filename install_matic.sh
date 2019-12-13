@@ -135,7 +135,7 @@ if ! [ -x "$(command -v bor)" ];then
     curl https://raw.githubusercontent.com/maticnetwork/public-testnets/master/CS-1001/static-nodes.json > static-nodes.json
   fi
 else
-  echo "${GREEN} Bor already installer... ${DF}"
+  echo "${GREEN} Bor already installed... ${DF}"
 fi
 
 cd $GOPATH/src/github.com/maticnetwork
@@ -149,7 +149,7 @@ if ! [[ -d $GOPATH/src/github.com/maticnetwork/public-testnets ]]; then
 else
   cd public-testnets/CS-1001
   cp heimdall-genesis.json ~/.heimdalld/config/genesis.json
-  cd bor-config
+  cd ../bor-config
   cp ../CS-1001/bor-genesis.json genesis.json
 fi
 
