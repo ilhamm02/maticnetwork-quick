@@ -28,7 +28,7 @@ else
     echo -e "${GREEN} Installing dep.... ${DF}"
     curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
   else
-    echo "${GREEN} Golang and dep already installed... ${DF}"
+    echo -e "${GREEN} Golang and dep already installed... ${DF}"
   fi
 fi
 
@@ -44,7 +44,7 @@ if ! [ -x "$(command -v erl)" ];then
   sudo apt-get update
   sudo apt-get install esl-erlang -y
 else
-  echo "${GREEN} Erlang already installed... ${DF}"
+  echo -e "${GREEN} Erlang already installed... ${DF}"
 fi
 
 if ! [ -x "$(command -v rabbitmq-server)" ];then
@@ -55,7 +55,7 @@ if ! [ -x "$(command -v rabbitmq-server)" ];then
   sudo apt-get update
   sudo apt-get install rabbitmq-server -y
 else
-  echo "${GREEN} Rabbitmq-server already installed... ${DF}"
+  echo -e "${GREEN} Rabbitmq-server already installed... ${DF}"
 fi
 
 #Turn on rabbitmq-server
@@ -66,7 +66,7 @@ sudo systemctl enable rabbitmq-server.service
 if ! [ -x "$(command -v make)" ];then
   sudo apt-get install build-essential -y
 else
-  echo "${GREEN} Build essential already installed... ${DF}"
+  echo -e "${GREEN} Build essential already installed... ${DF}"
 fi
 
 if ! [ -x "$(command -v heimdalld)" ];then
@@ -104,7 +104,7 @@ if ! [ -x "$(command -v heimdalld)" ];then
     fi
   fi
 else
-  echo "${GREEN} Heimdalld already installed... ${DF}"
+  echo -e "${GREEN} Heimdalld already installed... ${DF}"
 fi
 
 #Setting Heimdall Node
@@ -154,7 +154,7 @@ else
 fi
 
 $GOPATH/src/github.com/maticnetwork/bor/build/bin/bor --datadir dataDir init genesis.json
-cp static-nodes.json $GOPATH/src/github.com/maticnetwork/public-testnets/bor-config/dataDir/bor/
+cp ../CS-1001/static-nodes.json $GOPATH/src/github.com/maticnetwork/public-testnets/bor-config/dataDir/bor/
 
 cd $GOPATH/src/github.com/maticnetwork/public-testnets/bor-config/dataDir/bor
 curl https://raw.githubusercontent.com/maticnetwork/public-testnets/master/CS-1001/static-nodes.json > static-nodes.json
