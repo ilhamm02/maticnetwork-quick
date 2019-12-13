@@ -15,7 +15,6 @@ if ! [ -x "$(command -v go)" ];then
 
   sudo tar -C /usr/local -xvf go1.13.5.linux-amd64.tar.gz
 
-  #Set golang environment
   export GOROOT=/usr/local/go
   export GOPATH=$HOME/go
   export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
