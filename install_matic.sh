@@ -82,12 +82,12 @@ if ! [ -x "$(command -v heimdalld)" ];then
       git clone https://github.com/maticnetwork/heimdall
       cd heimdall
 
-      git checkout CS-1001
+      git checkout CS-2001
       make dep && make install
     else
       cd heimdall
 
-      git checkout CS-1001
+      git checkout CS-2001
       make dep && make install
     fi
   else
@@ -97,12 +97,12 @@ if ! [ -x "$(command -v heimdalld)" ];then
       git clone https://github.com/maticnetwork/heimdall
       cd heimdall
 
-      git checkout CS-1001
+      git checkout CS-2001
       make dep && make install
     else
       cd heimdall
 
-      git checkout CS-1001
+      git checkout CS-2001
       make dep && make install
     fi
   fi
@@ -128,14 +128,14 @@ if ! [ -x "$(command -v bor)" ];then
   if ! [[ -d $GOPATH/src/github.com/maticnetwork/bor ]]; then
     git clone https://github.com/maticnetwork/bor
     cd bor
-    git checkout CS-1001
+    git checkout CS-2001
     make bor
-    curl https://raw.githubusercontent.com/maticnetwork/public-testnets/master/CS-1001/static-nodes.json > static-nodes.json
+    curl https://raw.githubusercontent.com/maticnetwork/public-testnets/master/CS-2001/static-nodes.json > static-nodes.json
   else
     cd bor
-    git checkout CS-1001
+    git checkout CS-2001
     make bor
-    curl https://raw.githubusercontent.com/maticnetwork/public-testnets/master/CS-1001/static-nodes.json > static-nodes.json
+    curl https://raw.githubusercontent.com/maticnetwork/public-testnets/master/CS-2001/static-nodes.json > static-nodes.json
   fi
 else
   echo "${GREEN} Bor already installed... ${DF}"
@@ -145,21 +145,21 @@ cd $GOPATH/src/github.com/maticnetwork
 git clone https://github.com/maticnetwork/public-testnets
 if ! [[ -d $GOPATH/src/github.com/maticnetwork/public-testnets ]]; then
   git clone https://github.com/maticnetwork/public-testnets
-  cd public-testnets/CS-1001
+  cd public-testnets/CS-2001
   cp heimdall-genesis.json ~/.heimdalld/config/genesis.json
   cd bor-config
-  cp ../CS-1001/bor-genesis.json genesis.json
+  cp ../CS-2001/bor-genesis.json genesis.json
 else
-  cd public-testnets/CS-1001
+  cd public-testnets/CS-2001
   cp heimdall-genesis.json ~/.heimdalld/config/genesis.json
   cd ../bor-config
-  cp ../CS-1001/bor-genesis.json genesis.json
+  cp ../CS-2001/bor-genesis.json genesis.json
 fi
 
 $GOPATH/src/github.com/maticnetwork/bor/build/bin/bor --datadir dataDir init genesis.json
-cp ../CS-1001/static-nodes.json $GOPATH/src/github.com/maticnetwork/public-testnets/bor-config/dataDir/bor/
+cp ../CS-2001/static-nodes.json $GOPATH/src/github.com/maticnetwork/public-testnets/bor-config/dataDir/bor/
 
 cd $GOPATH/src/github.com/maticnetwork/public-testnets/bor-config/dataDir/bor
-curl https://raw.githubusercontent.com/maticnetwork/public-testnets/master/CS-1001/static-nodes.json > static-nodes.json
+curl https://raw.githubusercontent.com/maticnetwork/public-testnets/master/CS-2001/static-nodes.json > static-nodes.json
 
 exit
