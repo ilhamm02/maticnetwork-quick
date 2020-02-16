@@ -138,7 +138,7 @@ if ! [ -x "$(command -v bor)" ];then
     curl https://raw.githubusercontent.com/maticnetwork/public-testnets/master/CS-2001/static-nodes.json > static-nodes.json
   fi
 else
-  echo "${GREEN} Bor already installed... ${DF}"
+  echo -e "${GREEN} Bor already installed... ${DF}"
 fi
 
 cd $GOPATH/src/github.com/maticnetwork
