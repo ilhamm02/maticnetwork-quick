@@ -73,6 +73,7 @@ else
 fi
 
 if ! [ -x "$(command -v heimdalld)" ];then
+  echo -e "${GREEN} Installing Heimdall.... ${DF}"
   mkdir -p $GOPATH/src/github.com/maticnetwork
   if ! [[ -d $GOPATH/src/github.com/maticnetwork ]]; then
     mkdir -p $GOPATH/src/github.com/maticnetwork
